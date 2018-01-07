@@ -12,7 +12,7 @@ The default set of cogs are:
 
 WIP
 
-# Bugs
+# Known Bugs
 Needs more testing:
 * !cleanup on normal users
 * !rename on normal users
