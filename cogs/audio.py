@@ -1927,7 +1927,8 @@ class Audio:
     @commands.command(pass_context=True, no_pm=True)
     async def sing(self, ctx):
         """Makes MooBot play great songs."""
-        ids = ("MdaOT72ieXs", "lBVqtNmLeBQ") # TODO: Add links
+        ids = ("MdaOT72ieXs", "lBVqtNmLeBQ", "D18ge1ZyGyw", "2q-OpM6G4jI")
+        # TODO: Add links
         url = "https://www.youtube.com/watch?v={}".format(choice(ids))
         await ctx.invoke(self.play, url_or_search_terms=url)
 
