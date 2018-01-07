@@ -811,7 +811,7 @@ class Owner:
         if isinstance(author, discord.Member):
             colour = author.colour
         else:
-            colour = discord.Colour.red()
+            colour = discord.Colour.green()
 
         description = "Sent by {} {}".format(author, source)
 
@@ -866,7 +866,7 @@ class Owner:
             "Please post your inquiries/bugs here at({})\n\n"
             "".format(moobot_repo, author_repo, server_url))
 
-        embed = discord.Embed(colour=discord.Colour.red())
+        embed = discord.Embed(colour=discord.Colour.green())
         embed.add_field(name="Instance owned by", value=str(owner))
         embed.add_field(name="Python", value=py_version)
         embed.add_field(name="discord.py", value=dpy_version)
@@ -994,7 +994,7 @@ class Owner:
         if not os.path.isdir(".git"):
             msg = "This instance of MooBot hasn't been installed with git."
             e = discord.Embed(title=msg,
-                              colour=discord.Colour.red())
+                              colour=discord.Colour.green())
             return e
 
         commands = " && ".join((
@@ -1014,7 +1014,7 @@ class Owner:
 
         embed = discord.Embed(title="Updates of " + repo_name,
                               description="Last three updates",
-                              colour=discord.Colour.red(),
+                              colour=discord.Colour.green(),
                               url="{}/tree/{}".format(url, branch))
 
         for line in commits.split('\n'):
