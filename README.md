@@ -31,12 +31,8 @@ WIP
 **audio.py:**
 * Fix duration (1:00) for songs over 1:00
 
-**mod.py:**
-* !cleanup does not function properly.
-
 Needs more testing:
-* !rename on normal users.
-* filtered words on normal users.
+
 
 # License
 Released under the [GNU GPL v3](LICENSE).
