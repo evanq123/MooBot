@@ -247,10 +247,10 @@ def requirements_menu():
         print("\n0. Go back")
         choice = user_choice()
 
-        install_reqs()
-        wait()
-
-        if choice == "2" and IS_WINDOWS:
+        if choice == "1":
+            install_reqs()
+            wait()
+        elif choice == "2" and IS_WINDOWS:
             download_ffmpeg(bitness="32bit")
             wait()
         elif choice == "3" and (IS_WINDOWS and IS_64BIT):
@@ -347,7 +347,7 @@ def maintenance_menu():
         clear_screen()
 
 
-def run_moobot
+def run_moobot(autorestart):
     interpreter = sys.exectutable
 
     if interpreter is None: # How can this happen?
@@ -382,7 +382,7 @@ def run_moobot
         wait()
 
 
-def clear_screan():
+def clear_screen():
     if IS_WINDOWS:
         os.system("cls")
     else:
