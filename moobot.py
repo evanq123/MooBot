@@ -15,7 +15,7 @@ except ImportError:
     print("Discord.py is not installed.\n"
           "Consult the guide for your operating system "
           "and do ALL the steps in order.\n"
-          "https://twentysix26.github.io/Red-Docs/\n")
+          "(Guide is a WIP)\n") # TODO: Add guide
     sys.exit(1)
 
 from cogs.utils.settings import Settings
@@ -163,7 +163,7 @@ class Bot(commands.Bot):
 
         return True
 
-    async def pip_install(self, name, *, timeout=None)
+    async def pip_install(self, name, *, timeout=None):
         """
         Installs a pip package in the local 'lib' folder inaa thread safe
         way. On Macs, the 'lib' folder is not used.
