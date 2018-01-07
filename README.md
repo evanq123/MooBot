@@ -14,9 +14,9 @@ WIP
 
 # Bugs
 Needs more testing:
-	* !cleanup on normal users
-	* !rename on normal users
-	* filtered words on normal users
+* !cleanup on normal users
+* !rename on normal users
+* filtered words on normal users
 # License
 
 Released under the [GNU GPL v3](LICENSE).
