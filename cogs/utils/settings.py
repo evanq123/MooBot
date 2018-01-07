@@ -35,7 +35,7 @@ class Settings:
                     if key not in current.keys():
                         current[key] = self.default_settings[key]
                         print("Adding " + str(key) +
-                              " field to MooCow settings.json")
+                              " field to MooBot settings.json")
                 dataIO.save_json(self.path, current)
             self.bot_settings = dataIO.load_json(self.path)
 
@@ -49,13 +49,13 @@ class Settings:
 
 
     def parse_cmd_arguments(self):
-        parser = argparse.ArgumentParser(description="MooCow - Discord Bot")
+        parser = argparse.ArgumentParser(description="MooBot - Discord Bot")
         parser.add_argument("--owner", help="ID of the owner. Only who hosts "
-                                            "MooCow should be owner, this has "
+                                            "MooBot should be owner, this has "
                                             "security implications")
         parser.add_argument("--co-owner", action="append", default=[],
                             help="ID of a co-owner. Only people who have "
-                                 "access to the system that is hosting MooCow "
+                                 "access to the system that is hosting MooBot "
                                  "should be  co-owners, as this gives them "
                                  "complete access to the system's data. "
                                  "This has serious security implications if "
@@ -63,8 +63,8 @@ class Settings:
         parser.add_argument("--prefix", "-p", action="append",
                             help="Global prefix. Can be multiple")
         parser.add_argument("--admin-role", help="Role seen as admin role by "
-                                                 "MooCow")
-        parser.add_argument("--mod-role", help="Role seen as mod role by MooCow")
+                                                 "MooBot")
+        parser.add_argument("--mod-role", help="Role seen as mod role by MooBot")
         parser.add_argument("--no-prompt",
                             action="store_true",
                             help="Disables console inputs. Features requiring "
@@ -72,17 +72,17 @@ class Settings:
                                  "result")
         parser.add_argument("--no-cogs",
                             action="store_true",
-                            help="Starts MooCow with no cogs loaded, only core")
+                            help="Starts MooBot with no cogs loaded, only core")
         parser.add_argument("--self-bot",
                             action='store_true',
-                            help="Specifies if MooCow should log in as selfbot")
+                            help="Specifies if MooBot should log in as selfbot")
         parser.add_argument("--memory-only",
                             action="store_true",
                             help="Arguments passed and future edits to the "
                                  "settings will not be saved to disk")
         parser.add_argument("--dry-run",
                             action="store_true",
-                            help="Makes MooCow quit with code 0 just before the "
+                            help="Makes MooBot quit with code 0 just before the "
                                  "login. This is useful for testing the boot "
                                  "process.")
         parser.add_argument("--debug",
