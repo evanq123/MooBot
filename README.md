@@ -5,8 +5,8 @@
 **MooBot** is a fully modular bot – meaning all features and commands can be enabled/disabled to your liking, making it completely customizable. This is a *self-hosted bot*.
 
 The default set of cogs are:
-* *Moderation features
-* Music features*
+* Moderation features
+* Music features
 
 # TODO:
 **audio.py:**
@@ -19,7 +19,7 @@ The default set of cogs are:
 * (local only) Display comments in metadata.
 * Adding server hosting.
 
-**Other cogs:**
+**Ideas for cogs:**
 * akinator.py
 * steam.py
 * league.py
