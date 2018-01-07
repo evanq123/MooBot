@@ -308,7 +308,7 @@ def initialize(bot_class=Bot, formatter_class=Formatter):
         print("\nOfficial server: https://discord.gg/MooBot")
 
         print("Keep MooBot updated from the 'Update' "
-              "option from the launcer.")
+              "option from the launcher.")
 
         await bot.get_cog('Owner').disable_commands()
 
@@ -555,7 +555,7 @@ def load_cogs(bot):
     dataIO.save_json("data/moobot/cogs.json", registry)
 
     if failed:
-        print("\nFaliled to load: {}\n".format(" ".join(failed)))
+        print("\nFailed to load: {}\n".format(" ".join(failed)))
 
 
 def main(bot):

@@ -1790,6 +1790,7 @@ class Audio:
                 song_info.append("{}. {.webpage_url}".format(num, song))
         msg += "\n***Next up:***\n" + "\n".join(song_info)
 
+        emb = create_embed("Queue:", msg, discord.Colour.blue())
         await self.bot.say(msg)
 
     @commands.group(pass_context=True, no_pm=True)
