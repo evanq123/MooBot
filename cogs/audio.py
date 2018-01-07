@@ -1800,9 +1800,9 @@ class Audio:
         if ctx.invoked_subcommand is None:
             if self.is_playing(server):
                 if self.queue[server.id][QueueKey.REPEAT]:
-                    msg = "The queue is currently looping."
+                    msg = "The queue will now loop."
                 else:
-                    msg = "The queue is currently not looping."
+                    msg = "The queue is no longer looping."
                 await self.bot.say(msg)
                 await self.bot.say(
                     "Do `{}repeat toggle` to change this.".format(ctx.prefix))
@@ -1837,13 +1837,13 @@ class Audio:
         voice_client = self.voice_client(server)
 
         if not hasattr(voice_client, 'audio_player'):
-            await self.bot.say("Nothing paused, nothing to resume.")
+            await self.bot.say("Nothing queued on this server.")
         elif not voice_client.audio_player.is_done() and \
                 not voice_client.audio_player.is_playing():
             voice_client.audio_player.resume()
             await self.bot.say("Resuming.")
         else:
-            await self.bot.say("Nothing paused, nothing to resume.")
+            await self.bot.say("Nothing queued on this server.")
 
     @commands.command(pass_context=True, no_pm=True, name="shuffle")
     async def _shuffle(self, ctx):
@@ -1856,7 +1856,7 @@ class Audio:
         self._shuffle_queue(server)
         self._shuffle_temp_queue(server)
 
-        await self.bot.say("Queues shuffled.")
+        await self.bot.say("The queue is now shuffled.")
 
     @commands.command(pass_context=True, aliases=["next"], no_pm=True)
     async def skip(self, ctx):
@@ -1976,7 +1976,7 @@ class Audio:
         if self.is_playing(server):
             if ctx.message.author.voice_channel == server.me.voice_channel:
                 if self.can_instaskip(ctx.message.author):
-                    queue = len(self.queue[server.id][QueueKey.QUEUE])
+                    queue = len(self.queue[server.id][QueueKey.QUEUE]) + 1
                     await self.bot.say("The queue has been emptied.`{0}` "
                                         "songs removed.".format(queue))
                     self._stop(server)
