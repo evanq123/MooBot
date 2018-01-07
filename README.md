@@ -14,6 +14,7 @@ WIP
 
 # Known Bugs
 * !cleanup does not function properly.
+
 Needs more testing:
 * !rename on normal users.
 * filtered words on normal users.
