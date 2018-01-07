@@ -11,7 +11,7 @@ class InvalidFileIO(Exception):
 class DataIO():
 
     def __init__(self):
-        self.logger = logging.getLogger("red")
+        self.logger = logging.getLogger("moobot")
 
 
     def save_json(self, filename, data):
