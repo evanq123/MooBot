@@ -336,7 +336,7 @@ def initialize(bot_class=Bot, formatter_class=Formatter):
         elif isinstance(error, commands.DisabledCommand):
             await bot.send_message(channel, "That command is disabled.")
         elif isinstance(error, commands.CommandInvokeError):
-            # Hacky implementation TODO: Reimplement
+            # Hacky TODO:fix implementation
             no_dms = "Cannot send messages to this user"
             is_help_cmd = ctx.command.qualified_name == "help"
             is_forbidden = isinstance(error.original, discord.Forbidden)
