@@ -1791,7 +1791,7 @@ class Audio:
         msg += "\n***Next up:***\n" + "\n".join(song_info)
 
         emb = create_embed("Queue:", msg, discord.Colour.blue())
-        await self.bot.say(msg)
+        await self.bot.say(embed=emb)
 
     @commands.group(pass_context=True, no_pm=True)
     async def repeat(self, ctx):
