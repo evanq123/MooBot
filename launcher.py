@@ -359,7 +359,7 @@ def run_moobot(autorestart):
         if not INTERACTIVE_MODE:
             exit(1)
 
-    cmd = (interpreter, "red.py")
+    cmd = (interpreter, "moobot.py")
 
     while True:
         try:
