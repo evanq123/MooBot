@@ -9,7 +9,6 @@ default_path = "data/moobot/settings.json"
 
 
 class Settings:
-
     def __init__(self, path=default_path, parse_args=True):
         self.path = path
         self.check_folders()
@@ -46,7 +45,6 @@ class Settings:
             self.update_old_settings_v2()
         if parse_args:
             self.parse_cmd_arguments()
-
 
     def parse_cmd_arguments(self):
         parser = argparse.ArgumentParser(description="MooBot - Discord Bot")
@@ -110,7 +108,6 @@ class Settings:
 
         self.save_settings()
 
-
     def check_folders(self):
         folders = ("data", os.path.dirname(self.path), "cogs", "cogs/utils")
         for folder in folders:
@@ -118,26 +115,21 @@ class Settings:
                 print("Creating " + folder + " folder...")
                 os.makedirs(folder)
 
-
     def save_settings(self):
         if not self._memory_only:
             dataIO.save_json(self.path, self.bot_settings)
-
 
     @property
     def owner(self):
         return self.bot_settings["OWNER"]
 
-
     @owner.setter
     def owner(self, value):
         self.bot_settings["OWNER"] = value
 
-
     @property
     def token(self):
         return os.environ.get("MOOBOT_TOKEN", self.bot_settings["TOKEN"])
-
 
     @token.setter
     def token(self, value):
@@ -145,27 +137,22 @@ class Settings:
         self.bot_settings["EMAIL"] = None
         self.bot_settings["PASSWORD"] = None
 
-
     @property
     def email(self):
         return os.environ.get("MOOBOT_EMAIL", self.bot_settings["EMAIL"])
-
 
     @email.setter
     def email(self, value):
         self.bot_settings["EMAIL"] = value
         self.bot_settings["TOKEN"] = None
 
-
     @property
     def password(self):
         return os.environ.get("MOOBOT_PASSWORD", self.bot_settings["PASSWORD"])
 
-
     @password.setter
     def password(self, value):
         self.bot_settings["PASSWORD"] = value
-
 
     @property
     def login_credentials(self):
@@ -176,24 +163,20 @@ class Settings:
         else:
             return tuple()
 
-
     @property
     def prefixes(self):
         return self.bot_settings["PREFIXES"]
-
 
     @prefixes.setter
     def prefixes(self, value):
         assert isinstance(value, list)
         self.bot_settings["PREFIXES"] = value
 
-
     @property
     def default_admin(self):
         if "default" not in self.bot_settings:
             self.update_old_settings()
         return self.bot_settings["default"].get("ADMIN_ROLE", "")
-
 
     @default_admin.setter
     def default_admin(self, value):
