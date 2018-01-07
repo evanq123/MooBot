@@ -10,19 +10,19 @@ The default set of cogs are:
 
 # TODO:
 **audio.py:**
-* Play .mp3 files sent to discord.
+`* Play .mp3 files sent to discord.
 * (local only) Send a download link for .mp3 file currently playing.
 * Send link to lyrics (or fetch).
 * Seek (to Time/ +10 secs).
 * (local only) Display Album/Anime track belongs to.
 * (local only) Display title and artist
 * (local only) Display comments in metadata.
-* Adding server hosting.
+* Adding server hosting.`
 
 **Other cogs:**
-* akinator.py
+`* akinator.py
 * steam.py
-* league.py
+* league.py`
 
 # Installation
 
@@ -30,14 +30,14 @@ WIP
 
 # Known Bugs
 **audio.py:**
-* Fix duration (1:00) for songs over 1:00
+`* Fix duration (1:00) for songs over 1:00`
 
 **mod.py:**
-* !cleanup does not function properly.
+`* !cleanup does not function properly.
 
-  Needs more testing:
+Needs more testing:
 * !rename on normal users.
 * filtered words on normal users.
-# License
+# License`
 
 Released under the [GNU GPL v3](LICENSE).
