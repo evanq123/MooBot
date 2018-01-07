@@ -1960,10 +1960,10 @@ class Audio:
                    "**Views:** {}\n**Duration:** {}\n\n<{}>".format(
                        song.title, song.creator, song.uploader,
                        song.view_count, dur, song.webpage_url))
-            msg.replace("**Author:** None\n", "")
-                .replace("**Views:** None\n", "")
-                .replace("**Uploader:** None\n", "")
-                .replace("**Duration:** None\n", "")
+            msg = (msg.replace("**Author:** None\n", "")
+                      .replace("**Views:** None\n", "")
+                      .replace("**Uploader:** None\n", "")
+                      .replace("**Duration:** None\n", ""))
             colour = discord.Colour.green()
             emb = create_embed("Now Playing:", msg, colour)
             await self.bot.say(embed=emb)
