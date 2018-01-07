@@ -19,8 +19,8 @@ class Settings:
             "PASSWORD": None,
             "OWNER": None,
             "PREFIXES": [],
-            "default": {"ADMIN_ROLE": "Transistor",
-                        "MOD_ROLE": "Process",
+            "default": {"ADMIN_ROLE": "Administrators",
+                        "MOD_ROLE": "Moderators",
                         "PREFIXES": []}
                         }
         self._memory_only = False
@@ -124,36 +124,6 @@ class Settings:
             dataIO.save_json(self.path, self.bot_settings)
 
 
-    def update_old_settings_v1(self):
-        # This converts the old settings format
-        mod = self.bot_settings["MOD_ROLE"]
-        admin = self.bot_settings["ADMIN_ROLE"]
-        del self.bot_settings["MOD_ROLE"]
-        del self.bot_settings["ADMIN_ROLE"]
-        self.bot_settings["default"] = {"MOD_ROLE": mod,
-                                        "ADMIN_ROLE": admin,
-                                        "PREFIXES": []
-                                        }
-        self.save_settings()
-
-
-    def update_old_settings_v2(self):
-        # The joys of backwards compatibility
-        settings = self.bot_settings
-        if settings["EMAIL"] == "EmailHere":
-            settings["EMAIL"] = None
-        if settings["PASSWORD"] == "":
-            settings["PASSWORD"] = None
-        if settings["LOGIN_TYPE"] == "token":
-            settings["TOKEN"] = settings["EMAIL"]
-            settings["EMAIL"] = None
-            settings["PASSWORD"] = None
-        else:
-            settings["TOKEN"] = None
-        del settings["LOGIN_TYPE"]
-        self.save_settings()
-
-
     @property
     def owner(self):
         return self.bot_settings["OWNER"]
@@ -166,7 +136,7 @@ class Settings:
 
     @property
     def token(self):
-        return os.environ.get("RED_TOKEN", self.bot_settings["TOKEN"])
+        return os.environ.get("MOOBOT_TOKEN", self.bot_settings["TOKEN"])
 
 
     @token.setter
@@ -178,7 +148,7 @@ class Settings:
 
     @property
     def email(self):
-        return os.environ.get("RED_EMAIL", self.bot_settings["EMAIL"])
+        return os.environ.get("MOOBOT_EMAIL", self.bot_settings["EMAIL"])
 
 
     @email.setter
@@ -189,7 +159,7 @@ class Settings:
 
     @property
     def password(self):
-        return os.environ.get("RED_PASSWORD", self.bot_settings["PASSWORD"])
+        return os.environ.get("MOOBOT_PASSWORD", self.bot_settings["PASSWORD"])
 
 
     @password.setter
