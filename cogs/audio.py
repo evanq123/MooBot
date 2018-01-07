@@ -1790,7 +1790,7 @@ class Audio:
                 song_info.append("{}. {.webpage_url}".format(num, song))
         msg += "\n***Next up:***\n" + "\n".join(song_info)
 
-        emb = create_embed("Queue:", msg, discord.Colour.blue())
+        emb = create_embed("Songs Queued:", msg, discord.Colour.blue())
         await self.bot.say(embed=emb)
 
     @commands.group(pass_context=True, no_pm=True)
@@ -1976,7 +1976,9 @@ class Audio:
         if self.is_playing(server):
             if ctx.message.author.voice_channel == server.me.voice_channel:
                 if self.can_instaskip(ctx.message.author):
-                    await self.bot.say('Stopping...')
+                    queue = len(self.queue[server.id][QueueKey.QUEUE])
+                    await self.bot.say("The queue has been emptied.`{0}` "
+                                        "songs removed.".format(queue))
                     self._stop(server)
                 else:
                     await self.bot.say("You can't stop music when there are other"
