@@ -6,6 +6,7 @@ from random import shuffle, choice
 from cogs.utils.dataIO import dataIO
 from cogs.utils import checks
 from cogs.utils.chat_formatting import pagify, escape
+from cogs.utils.emb import create_embed
 from urllib.parse import urlparse
 from __main__ import send_cmd_help, settings
 from json import JSONDecodeError
@@ -407,20 +408,17 @@ class Audio:
                 server.id))
             to_connect = self.bot.get_channel(voice_channel_id)
             if to_connect is None:
-                raise VoiceNotConnected("Okay somehow we're not connected and"
-                                        " we have no valid channel to"
-                                        " reconnect to. In other words...LOL"
-                                        " REKT.")
+                raise VoiceNotConnected("I'm not connected and there are "
+                                        "no valid channel to recconexct to.")
             log.debug("valid reconnect channel for sid"
                       " {}, reconnecting...".format(server.id))
             await self._join_voice_channel(to_connect)  # SHIT
         elif voice_client.channel.id != voice_channel_id:
-            # This was decided at 3:45 EST in #advanced-testing by 26
             self.queue[server.id][QueueKey.VOICE_CHANNEL_ID] = voice_client.channel.id
             log.debug("reconnect chan id for sid {} is wrong, fixing".format(
                 server.id))
 
-        # Okay if we reach here we definitively have a working voice_client
+        # If we reach here we definitively have a working voice_client
 
         if local:
             song_filename = os.path.join(self.local_playlist_path, filename)
@@ -493,12 +491,6 @@ class Audio:
             await asyncio.sleep(0.1)
 
         songs = [d.song for d in downloaders if d.song is not None and d.error is None]
-
-        invalid_downloads = [d for d in downloaders if d.error is not None]
-        invalid_number = len(invalid_downloads)
-        if(invalid_number > 0):
-            await self.bot.send_message(channel, "The queue contains {} item(s)"
-                                            " that can not be played.".format(invalid_number))
 
         return songs
 
@@ -633,17 +625,16 @@ class Audio:
             self.downloaders[server.id] = Downloader(url, max_length)
 
         if self.downloaders[server.id].url != url:  # Our downloader is old
-            # I'm praying to Jeezus that we don't accidentally lose a running
-            #   Downloader
+            # Hope that we don't accidentally lose a running downloader
             log.debug("sid {} in downloaders but wrong url".format(server.id))
             self.downloaders[server.id] = Downloader(url, max_length)
 
         try:
-            # We're assuming we have the right thing in our downloader object
+            # Assuming we have the right thing in our downloader object
             self.downloaders[server.id].start()
             log.debug("starting our downloader for sid {}".format(server.id))
         except RuntimeError:
-            # Queue manager already started it for us, isn't that nice?
+            # Queue manager already started it.
             pass
 
         # Getting info w/o download
@@ -698,7 +689,7 @@ class Audio:
         except asyncio.futures.TimeoutError as e:
             log.exception(e)
             self.connect_timers[server.id] = time.time() + 300
-            raise ConnectTimeout("We timed out connecting to a voice channel,"
+            raise ConnectTimeout("Timed out connecting to a voice channel,"
                                  " please try again in 10 minutes.")
 
     def _list_local_playlists(self):
@@ -1154,12 +1145,8 @@ class Audio:
         self.set_server_setting(server, "NOPPL_DISCONNECT",
                                 not noppl_disconnect)
         if not noppl_disconnect:
-            await self.bot.say("If there is no one left in the voice channel"
-                               " the bot will automatically disconnect after"
+            await self.bot.say("I will automatically disconnect after"
                                " five minutes.")
-        else:
-            await self.bot.say("The bot will no longer auto disconnect"
-                               " if the voice channel is empty.")
         self.save_settings()
 
     @audioset.command(name="maxlength")
@@ -1167,8 +1154,7 @@ class Audio:
     async def audioset_maxlength(self, length: int):
         """Maximum track length (seconds) for requested links"""
         if length <= 0:
-            await self.bot.say("Wow, a non-positive length value...aren't"
-                               " you smart.")
+            await self.bot.say("Please enter a positive value.")
             return
         self.settings["MAX_LENGTH"] = length
         await self.bot.say("Maximum length is now {} seconds.".format(length))
@@ -1209,10 +1195,10 @@ class Audio:
         server = ctx.message.server
         if percent is None:
             vol = self.get_server_settings(server)['VOLUME']
-            msg = "Volume is currently set to %d%%" % vol
+            msg = "Volume is currently set to {}".format(vol)
         elif percent >= 0 and percent <= 200:
             self.set_server_setting(server, "VOLUME", percent)
-            msg = "Volume is now set to %d." % percent
+            msg = "Volume is now set to {}.".format(percent)
             if percent > 100:
                 msg += ("\nWarning: volume levels above 100 may result in"
                         " clipping")
@@ -1366,14 +1352,14 @@ class Audio:
         # Checking if playing in current server
 
         if self.is_playing(server):
-            await self.bot.say("I'm already playing a song on this server!")
+            await self.bot.say("I'm already playing a song on this server.")
             return  # TODO: Possibly execute queue?
 
         # If not playing, spawn a downloader if it doesn't exist and begin
         #   downloading the next song
 
         if self.currently_downloading(server):
-            await self.bot.say("I'm already downloading a file!")
+            await self.bot.say("I'm already downloading a file.")
             return
 
         lists = self._list_local_playlists()
@@ -1576,9 +1562,7 @@ class Audio:
                 name, len(songlist)))
         else:
             await self.bot.say("That URL is not a valid Soundcloud or YouTube"
-                               " playlist link. If you think this is in error"
-                               " please let us know and we'll get it"
-                               " fixed ASAP.")
+                               " playlist link.")
 
     @playlist.command(pass_context=True, no_pm=True, name="append")
     async def playlist_append(self, ctx, name, url):
@@ -1769,7 +1753,7 @@ class Audio:
         server = ctx.message.server
         channel = ctx.message.channel
         if server.id not in self.queue:
-            await self.bot.say("Nothing playing on this server!")
+            await self.bot.say("Nothing playing on this server.")
             return
         elif len(self.queue[server.id][QueueKey.QUEUE]) == 0:
             await self.bot.say("Nothing queued on this server.")
@@ -1949,6 +1933,7 @@ class Audio:
     @commands.command(pass_context=True, no_pm=True)
     async def song(self, ctx):
         """Info about the current song."""
+        # TODO: Add info exclusively for local playlist.
         server = ctx.message.server
         if not self.is_playing(server):
             await self.bot.say("I'm not playing on this server.")
@@ -1975,12 +1960,13 @@ class Audio:
                    "**Views:** {}\n**Duration:** {}\n\n<{}>".format(
                        song.title, song.creator, song.uploader,
                        song.view_count, dur, song.webpage_url))
-            await self.bot.say(msg.replace("**Author:** None\n", "")
-                                  .replace("**Views:** None\n", "")
-                                  .replace("**Uploader:** None\n", "")
-                                  .replace("**Duration:** None\n", ""))
-        else:
-            await self.bot.say("Darude - Sandstorm.")
+            msg.replace("**Author:** None\n", "")
+                .replace("**Views:** None\n", "")
+                .replace("**Uploader:** None\n", "")
+                .replace("**Duration:** None\n", "")
+            colour = discord.Colour.green()
+            emb = create_embed("Now Playing:", msg, colour)
+            await self.bot.say(embed=emb)
 
     @commands.command(pass_context=True, no_pm=True)
     async def stop(self, ctx):
@@ -1998,7 +1984,7 @@ class Audio:
             else:
                 await self.bot.say("You need to be in the voice channel to stop the music.")
         else:
-            await self.bot.say("Can't stop if I'm not playing.")
+            await self.bot.say("I'm not playing anything.")
 
     @commands.command(name="yt", pass_context=True, no_pm=True)
     async def yt_search(self, ctx, *, search_terms: str):
@@ -2200,11 +2186,6 @@ class Audio:
                         temp_queue.popleft()
                     elif len(queue) > 0:
                         queue.popleft()
-                    clean_url = self._clean_url(next_url)
-                    message = ("I'm unable to play '{}' because of an "
-                              "error:\n'{}'".format(clean_url, str(e)))
-                    message = escape(message, mass_mentions=True)
-                    await self.bot.send_message(next_channel, message)
 
     async def queue_scheduler(self):
         while self == self.bot.get_cog('Audio'):
