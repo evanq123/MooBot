@@ -119,6 +119,10 @@ class Bot(commands.Bot):
             pages = self.formatter.format_help_for(ctx, ctx.invoked_subcommand)
             for page in pages:
                 await self.send_message(ctx.channel, page)
+            else:
+                pages = self.formatter.format_help_for(ctx, ctx.command)
+                for page in pages:
+                    await self.send_message(ctx.message.channel, page)
 
     def user_allowed(self, message):
         author = message.author
