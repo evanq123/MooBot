@@ -306,8 +306,7 @@ class Mod:
         server = author.server
 
         if author == user:
-            await self.bot.say("I cannot let you do that. Self-harm is "
-                               "bad \N{PENSIVE FACE}")
+            await self.bot.say("I cannot let you do that.")
             return
         elif not self.is_allowed_by_hierarchy(server, author, user):
             await self.bot.say("I cannot let you do that. You are "
@@ -324,7 +323,7 @@ class Mod:
                                 mod=author,
                                 user=user,
                                 reason=reason)
-            await self.bot.say("Done. That felt good.")
+            await self.bot.say("Done.")
         except discord.errors.Forbidden:
             await self.bot.say("I'm not allowed to do that.")
         except Exception as e:
@@ -341,8 +340,7 @@ class Mod:
         server = author.server
 
         if author == user:
-            await self.bot.say("I cannot let you do that. Self-harm is "
-                               "bad \N{PENSIVE FACE}")
+            await self.bot.say("I cannot let you do that.")
             return
         elif not self.is_allowed_by_hierarchy(server, author, user):
             await self.bot.say("I cannot let you do that. You are "
@@ -376,7 +374,7 @@ class Mod:
                                 mod=author,
                                 user=user,
                                 reason=reason)
-            await self.bot.say("Done. It was about time.")
+            await self.bot.say("Done.")
         except discord.errors.Forbidden:
             await self.bot.say("I'm not allowed to do that.")
         except Exception as e:
@@ -435,8 +433,7 @@ class Mod:
         author = ctx.message.author
 
         if author == user:
-            await self.bot.say("I cannot let you do that. Self-harm is "
-                               "bad \N{PENSIVE FACE}")
+            await self.bot.say("I cannot let you do that.")
             return
         elif not self.is_allowed_by_hierarchy(server, author, user):
             await self.bot.say("I cannot let you do that. You are "
@@ -469,7 +466,7 @@ class Mod:
                                     reason=reason)
                 self.temp_cache.add(user, server, "UNBAN")
                 await self.bot.unban(server, user)
-                await self.bot.say("Done. Enough chaos.")
+                await self.bot.say("Done.")
             except discord.errors.Forbidden:
                 await self.bot.say("My role is not high enough to softban that user.")
                 await self.bot.delete_message(msg)
@@ -1216,7 +1213,7 @@ class Mod:
         Colour must be in hexadecimal format.
         \"http://www.w3schools.com/colors/colors_picker.asp\"
         Examples:
-        !editrole colour \"The Transistor\" #ff0000
+        !editrole colour \"Moderators\" #ff0000
         !editrole colour Test #ff9900"""
         author = ctx.message.author
         try:
@@ -1237,7 +1234,7 @@ class Mod:
 
         Use double quotes if the role or the name contain spaces.
         Examples:
-        !editrole name \"The Transistor\" Test"""
+        !editrole name \"Moderators\" Test"""
         if name == "":
             await self.bot.say("Name cannot be empty.")
             return
