@@ -311,7 +311,7 @@ class Owner:
     @_set.command(pass_context=True)
     @checks.is_owner()
     async def prefix(self, ctx, *prefixes):
-        """Sets Red's global prefixes
+        """Sets MooBot's global prefixes
 
         Accepts multiple prefixes separated by a space. Enclose in double
         quotes if a prefix contains spaces.
@@ -548,7 +548,7 @@ class Owner:
 
     @blacklist.command(name="remove")
     async def _blacklist_remove(self, user: GlobalUser):
-        """Removes user from Red's global blacklist"""
+        """Removes user from MooBot's global blacklist"""
         if user.id in self.global_ignores["blacklist"]:
             self.global_ignores["blacklist"].remove(user.id)
             self.save_global_ignores()
@@ -580,7 +580,7 @@ class Owner:
         """Whitelist management commands
 
         If the whitelist is not empty, only whitelisted users will
-        be able to use Red"""
+        be able to use MooBot"""
         if ctx.invoked_subcommand is None:
             await self.bot.send_cmd_help(ctx)
 
@@ -629,7 +629,7 @@ class Owner:
     @commands.command()
     @checks.is_owner()
     async def shutdown(self, silently : bool=False):
-        """Shuts down Red"""
+        """Shuts down MooBot"""
         wave = "\N{WAVING HAND SIGN}"
         try: # We don't want missing perms to stop our shutdown
             if not silently:
@@ -992,7 +992,7 @@ class Owner:
 
     def _get_version(self):
         if not os.path.isdir(".git"):
-            msg = "This instance of Red hasn't been installed with git."
+            msg = "This instance of MooBot hasn't been installed with git."
             e = discord.Embed(title=msg,
                               colour=discord.Colour.red())
             return e
@@ -1049,16 +1049,16 @@ class Owner:
         return fmt.format(d=days, h=hours, m=minutes, s=seconds)
 
     def save_global_ignores(self):
-        dataIO.save_json("data/red/global_ignores.json", self.global_ignores)
+        dataIO.save_json("data/moobot/global_ignores.json", self.global_ignores)
 
     def save_disabled_commands(self):
-        dataIO.save_json("data/red/disabled_commands.json", self.disabled_commands)
+        dataIO.save_json("data/moobot/disabled_commands.json", self.disabled_commands)
 
 
 def _import_old_data(data):
     """Migration from mod.py"""
     try:
-        data["blacklist"] = dataIO.load_json("data/mod/blacklist.json")
+        data["blacklist"] = dataIO.load_json("data/moobot/blacklist.json")
     except FileNotFoundError:
         pass
 
