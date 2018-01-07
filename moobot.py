@@ -51,7 +51,7 @@ class Bot(commands.Bot):
         self.settings = Settings()
         self._intro_displayed = False
         self._shutdown_mode = None
-        self.logger = set_loggeR(self)
+        self.logger = set_logger(self)
         self._last_exception = None
         self.oauth_url = ""
         if 'self_bot' in kwargs:
@@ -182,7 +182,7 @@ class Bot(commands.Bot):
             interpreter, "-m",
             "pip", "install",
             "--upgrade",
-            "--target", "lib"
+            "--target", "lib",
             name
         ]
 
@@ -272,7 +272,7 @@ def initialize(bot_class=Bot, formatter_class=Formatter):
         channels = len([c for c in bot.get_all_channels()])
 
         login_time = datetime.datetime.utcnow() - bot.uptime
-        login_time = logintime.seconds + login_time.microseconds/1E6
+        login_time = login_time.seconds + login_time.microseconds/1E6
 
         print ("Login successful, ({}ms)\n".format(login_time))
 
@@ -309,7 +309,7 @@ def initialize(bot_class=Bot, formatter_class=Formatter):
         await bot.get_cog('Owner').disable_commands()
 
     @bot.event
-    async def on resumed():
+    async def on_resumed():
         bot.counter["session_resumed"] += 1
 
     @bot.event
@@ -491,7 +491,7 @@ def ensure_reply(msg):
 
 
 def get_answer():
-    choices = "yes", "y", "no", "n")
+    choices = ("yes", "y", "no", "n")
     c = ""
     while c not in choices:
         c = input(">").lower()
@@ -536,7 +536,7 @@ def load_cogs(bot):
             registry["cogs." + ext] = True
 
     for extension in extensions:
-        if exentsion.lower() == "cogs.owner":
+        if extension.lower() == "cogs.owner":
             continue
         to_load = registry.get(extension, False)
         if to_load:
