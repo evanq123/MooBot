@@ -348,7 +348,7 @@ def maintenance_menu():
 
 
 def run_moobot(autorestart):
-    interpreter = sys.execututable
+    interpreter = sys.executable
 
     if interpreter is None: # How can this happen?
         raise Runtimeerror("Couldn't find Python's interpreter")
