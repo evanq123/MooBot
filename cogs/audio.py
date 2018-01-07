@@ -6,7 +6,7 @@ from random import shuffle, choice
 from cogs.utils.dataIO import dataIO
 from cogs.utils import checks
 from cogs.utils.chat_formatting import pagify, escape
-from cogs.utils.emb import create_embed
+from cogs.utils.embed import create_embed
 from urllib.parse import urlparse
 from __main__ import send_cmd_help, settings
 from json import JSONDecodeError
