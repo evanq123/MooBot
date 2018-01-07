@@ -485,8 +485,8 @@ def set_logger(bot):
 
 def ensure_reply(msg):
     choice = ""
-    while choise == "":
-        choise = input(msg)
+    while choice == "":
+        choice = input(msg)
     return choice
 
 
