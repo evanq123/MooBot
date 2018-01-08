@@ -30,6 +30,7 @@ WIP
 # Known Bugs
 **audio.py:**
 * Fix duration (1:00) for songs over 1:00
+* Fix !repeat visual bug
 
 Needs more testing:
 
