@@ -1791,7 +1791,7 @@ class Audio:
 
         embed = discord.Embed(colour=discord.Colour.blue())
         embed.add_field(name="Songs Queued:", value=msg)
-        await self.bot.say(embed=emb)
+        await self.bot.say(embed=embed)
 
     @commands.group(pass_context=True, no_pm=True)
     async def repeat(self, ctx):
@@ -1968,7 +1968,7 @@ class Audio:
                       .replace("**Duration:** None\n", ""))
             embed = discord.Embed(colour=discord.Colour.green())
             embed.add_field(name="Now Playing:", value=msg)
-            await self.bot.say(embed=emb)
+            await self.bot.say(embed=embed)
 
     @commands.command(pass_context=True, no_pm=True)
     async def stop(self, ctx):
