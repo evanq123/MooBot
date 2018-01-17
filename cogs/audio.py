@@ -1978,8 +1978,8 @@ class Audio:
             if ctx.message.author.voice_channel == server.me.voice_channel:
                 if self.can_instaskip(ctx.message.author):
                     queue = len(self.queue[server.id][QueueKey.QUEUE]) + 1
-                    await self.bot.say("The queue has been emptied.`{0}` "
-                                        "songs removed.".format(queue))
+                    await self.bot.say("The queue has been emptied. `{0}`"
+                                       " songs removed.".format(queue))
                     self._stop(server)
                 else:
                     await self.bot.say("You can't stop music when there are other"
