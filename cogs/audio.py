@@ -6,7 +6,6 @@ from random import shuffle, choice
 from cogs.utils.dataIO import dataIO
 from cogs.utils import checks
 from cogs.utils.chat_formatting import pagify, escape
-from cogs.utils.embed import create_embed
 from urllib.parse import urlparse
 from __main__ import send_cmd_help, settings
 from json import JSONDecodeError
@@ -1790,7 +1789,8 @@ class Audio:
                 song_info.append("{}. {.webpage_url}".format(num, song))
         msg += "\n***Next up:***\n" + "\n".join(song_info)
 
-        emb = create_embed("Songs Queued:", msg, discord.Colour.blue())
+        embed = discord.Embed(colour=discord.Colour.blue())
+        embed.add_field(name="Songs Queued:", value=msg)
         await self.bot.say(embed=emb)
 
     @commands.group(pass_context=True, no_pm=True)
@@ -1966,8 +1966,8 @@ class Audio:
                       .replace("**Views:** None\n", "")
                       .replace("**Uploader:** None\n", "")
                       .replace("**Duration:** None\n", ""))
-            colour = discord.Colour.green()
-            emb = create_embed("Now Playing:", msg, colour)
+            embed = discord.Embed(colour=discord.Colour.green())
+            embed.add_field(name="Now Playing:", value=msg)
             await self.bot.say(embed=emb)
 
     @commands.command(pass_context=True, no_pm=True)
