@@ -9,15 +9,16 @@ The default set of cogs are:
 * Music features
 
 # TODO:
-* Update MooBot's outputs (Talk more formally)
+* Update MooBot's outputs (Talk more formally).
+* Edit message with command, edit previous MooBot messages to reduce spam.
 
 **audio.py:**
 * Play .mp3 files sent to discord.
-* (local only) Send a download link for .mp3 file currently playing.
 * Send link to lyrics (or fetch).
 * Seek (to Time/ +10 secs).
+* (local only) Send a download link for .mp3 file currently playing.
 * (local only) Display Album/Anime track belongs to.
-* (local only) Display title and artist
+* (local only) Display title and artist.
 * (local only) Display comments in metadata.
 * Adding server hosting.
 
