@@ -9,6 +9,8 @@ The default set of cogs are:
 * Music features
 
 # TODO:
+* Update MooBot's outputs (Talk more formally)
+
 **audio.py:**
 * Play .mp3 files sent to discord.
 * (local only) Send a download link for .mp3 file currently playing.
@@ -23,6 +25,7 @@ The default set of cogs are:
 * akinator.py
 * steam.py
 * league.py
+* overwatch.py
 
 # Installation
 WIP
@@ -30,7 +33,7 @@ WIP
 # Known Bugs
 **audio.py:**
 * Fix duration (1:00) for songs over 1:00
-* Fix !repeat visual bug
+* !repeat toggle
 
 Needs more testing:
 
