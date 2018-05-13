@@ -6,7 +6,6 @@ from random import shuffle, choice
 from cogs.utils.dataIO import dataIO
 from cogs.utils import checks
 from cogs.utils.chat_formatting import pagify, escape
-from cogs.utils.embed import create_embed
 from urllib.parse import urlparse
 from __main__ import send_cmd_help, settings
 from json import JSONDecodeError
@@ -1790,8 +1789,9 @@ class Audio:
                 song_info.append("{}. {.webpage_url}".format(num, song))
         msg += "\n***Next up:***\n" + "\n".join(song_info)
 
-        emb = create_embed("Songs Queued:", msg, discord.Colour.blue())
-        await self.bot.say(embed=emb)
+        embed = discord.Embed(colour=discord.Colour.blue())
+        embed.add_field(name="Songs Queued:", value=msg)
+        await self.bot.say(embed=embed)
 
     @commands.group(pass_context=True, no_pm=True)
     async def repeat(self, ctx):
@@ -1966,9 +1966,9 @@ class Audio:
                       .replace("**Views:** None\n", "")
                       .replace("**Uploader:** None\n", "")
                       .replace("**Duration:** None\n", ""))
-            colour = discord.Colour.green()
-            emb = create_embed("Now Playing:", msg, colour)
-            await self.bot.say(embed=emb)
+            embed = discord.Embed(colour=discord.Colour.green())
+            embed.add_field(name="Now Playing:", value=msg)
+            await self.bot.say(embed=embed)
 
     @commands.command(pass_context=True, no_pm=True)
     async def stop(self, ctx):
@@ -1978,8 +1978,8 @@ class Audio:
             if ctx.message.author.voice_channel == server.me.voice_channel:
                 if self.can_instaskip(ctx.message.author):
                     queue = len(self.queue[server.id][QueueKey.QUEUE]) + 1
-                    await self.bot.say("The queue has been emptied.`{0}` "
-                                        "songs removed.".format(queue))
+                    await self.bot.say("The queue has been emptied. `{0}`"
+                                       " songs removed.".format(queue))
                     self._stop(server)
                 else:
                     await self.bot.say("You can't stop music when there are other"
