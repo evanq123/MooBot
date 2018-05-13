@@ -37,10 +37,11 @@ class Bot(commands.Bot):
 
         def prefix_manager(bot, message):
             """
-            Returns the prefix of the server if one is set.
-            Else, it will return the global prefix.
+            Returns prefixes of the message's server if set.
+            If none are set or if the message's server is None
+            it will return the global prefixes instead.
 
-            Requires a Bot instance and Message object to be
+            Requires a Bot instance and a Message object to be
             passed as arguments.
             """
             return bot.settings.get_prefixes(message.server)
@@ -68,7 +69,7 @@ class Bot(commands.Bot):
                 pass
             elif len(args) == 2:
                 args = list(args)
-                kw["content"] = args.pop()
+                kwargs["content"] = args.pop()
             else:
                 return await super().send_message(*args, **kwargs)
 
@@ -109,6 +110,13 @@ class Bot(commands.Bot):
                             "must be a callable.")
 
         self._message_modifiers.append(func)
+
+    def remove_message_modifier(self, func):
+        """Removes a message modifier from the bot"""
+        if func not in self.message_modifiers:
+            raise RuntimeError("Function not present in the message "
+                               "modifers.")
+        self._message_modifiers.remove(func)
 
     def clear_message_modifiers(self):
         """Removes all message modifiers from the bot"""
@@ -262,6 +270,8 @@ def initialize(bot_class=Bot, formatter_class=Formatter):
                 return data.owner
             except:
                 return "Failed to fetch owner. " + how_to
+        else:
+            return "Yet to be set. " + how_to
 
     @bot.event
     async def on_ready():
@@ -387,6 +397,7 @@ def interactive_setup(settings):
 
     if first_run:
         print("MooBot - First run configuration\n")
+        print("Create a new bot account.")
         print("Find your discord application's token.")
 
     if not settings.login_credentials:
@@ -403,10 +414,10 @@ def interactive_setup(settings):
         settings.save_settings()
 
         if not settings.prefixes:
-            print("\nA prefix is what you type before a command."
-                  "\nA typical prefix would be the exclamation mark.\n"
-                  "You will be able to change it "
-                  "later and add more of them.\nChoose your prefix:")
+        print("\nChoose a prefix. A prefix is what you type before a command."
+              "\nA typical prefix would be the exclamation mark.\n"
+              "Can be multiple characters. You will be able to change it "
+              "later and add more of them.\nChoose your prefix:")
             confirmation = False
             while confirmation is False:
                 new_prefix = ensure_reply("\nPrefix> ").strip()
@@ -419,9 +430,8 @@ def interactive_setup(settings):
             settings.save_settings()
 
         if first_run:
-            print("\nInput the admin role's name. "
-                  "Anyone with this role in Discord "
-                  "will be able to use the bot's admin commands")
+            print("\nInput the admin role's name. Anyone with this role in Discord"
+                  " will be able to use the bot's admin commands")
             print("Leave blank for default name (Administrators)")
             settings.default_admin = input("\nAdmin role> ")
             if settings.default_admin == "":

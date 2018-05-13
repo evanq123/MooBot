@@ -423,7 +423,7 @@ class Audio:
             to_connect = self.bot.get_channel(voice_channel_id)
             if to_connect is None:
                 raise VoiceNotConnected("I'm not connected and there are "
-                                        "no valid channel to recconexct to.")
+                                        "no valid channel to recconect to.")
             log.debug("valid reconnect channel for sid"
                       " {}, reconnecting...".format(server.id))
             await self._join_voice_channel(to_connect)  # SHIT
@@ -780,7 +780,7 @@ class Audio:
             return False
         yt_playlist = re.compile(
             r'^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)'
-            r'((\/playlist\?)|\/watch\?).*(list=)(.*)(&|$)')
+            r'(\/playlist\?).*(list=)(.*)(&|$)')
         # Group 6 should be the list ID
         if yt_playlist.match(url):
             return True
@@ -1165,6 +1165,9 @@ class Audio:
         if not noppl_disconnect:
             await self.bot.say("I will automatically disconnect after"
                                " five minutes.")
+        else:
+            await self.bot.say("I will no longer auto disconnect"
+                               " if the voice channel is empty.")
         self.save_settings()
 
     @audioset.command(name="maxlength")
@@ -2091,6 +2094,8 @@ class Audio:
             em.description = msg.replace('None', '-')
 
             await self.bot.say("**Currently Playing:**", embed=em)
+        else:
+            await self.bot.say("Not playing anything.")
 
     @commands.command(pass_context=True, no_pm=True)
     async def stop(self, ctx):
