@@ -414,7 +414,7 @@ def interactive_setup(settings):
         settings.save_settings()
 
         if not settings.prefixes:
-        print("\nChoose a prefix. A prefix is what you type before a command."
+            print("\nChoose a prefix. A prefix is what you type before a command."
               "\nA typical prefix would be the exclamation mark.\n"
               "Can be multiple characters. You will be able to change it "
               "later and add more of them.\nChoose your prefix:")
