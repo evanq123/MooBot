@@ -1,5 +1,4 @@
 # MooBot - A Modular Discord bot
-#### THIS VERSION IS NO LONGER SUPPORTED
 #### *Plays local music files and has general purpose server utilities*
 [<img src="https://img.shields.io/badge/discord-py-blue.svg">](https://github.com/Rapptz/discord.py) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
@@ -40,7 +39,7 @@ git clone -b v1-develop --single-branch https://github.com/evanq123/MooBot.git
 ```
 ### Updating the bot requirements
 ```
-cd Red-DiscordBot
+cd MooBot
 python3.5 launcher.py
 ```
 From there select Install requirements and select 1 or 2
