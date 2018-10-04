@@ -1,5 +1,4 @@
-# MooBot (beta v2.1) - A Modular Discord bot
-### THIS IS A REVAMP, NOT OFFICIALLY SUPPORTED.
+# MooBot (v1) - A Modular Discord bot
 #### *Plays local music files and has general purpose server utilities*
 [<img src="https://img.shields.io/badge/discord-py-blue.svg">](https://github.com/Rapptz/discord.py) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
@@ -8,10 +7,6 @@
 The default set of cogs are:
 * Moderation features
 * Music features
-
-# TODO:
-* Update MooBot's outputs (Talk more formally).
-* Edit message with command, edit previous MooBot messages to reduce spam.
 
 **audio.py:**
 * Play .mp3 files sent to discord.
@@ -31,13 +26,6 @@ The default set of cogs are:
 
 # Installation
 WIP
-
-# Known Bugs
-**audio.py:**
-* Fix duration (1:00) for songs over 1:00
-* !repeat toggle
-
-Needs more testing:
 
 # License
 Released under the [GNU GPL v3](LICENSE).
