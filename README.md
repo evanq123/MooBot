@@ -39,7 +39,7 @@ git clone -b v2-develop --single-branch https://github.com/evanq123/MooBot.git
 ```
 ### Updating the bot requirements
 ```
-cd moobot-discordbot
+cd MooBot
 python3.6 launcher.py
 ```
 From there select Install requirements and select 1 or 2
