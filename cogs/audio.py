@@ -1332,7 +1332,7 @@ class Audio:
                     await self.bot.say('Stopping...')
                     self._stop(server)
                 else:
-                    await self.bot.say("You don't have permission to clear...)
+                    await self.bot.say("You don't have permission to clear...")
             else:
                 await self.bot.say("You need to be in the voice channel to stop the music.")
         else:
