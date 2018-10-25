@@ -1,7 +1,5 @@
 *.json
-*.exe
 *.command
-*.dll
 data/
 
 ### Python template
