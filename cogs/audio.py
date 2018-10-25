@@ -1250,7 +1250,7 @@ class Audio:
                         self._set_queue_nowplaying(server, None, None)
                     await self.bot.say("Skipping...")
                 else:
-                    await self.bot.say("You don't have permission to skip...)
+                    await self.bot.say("You don't have permission to skip...")
             else:
                 await self.bot.say("You need to be in the voice channel to skip the music.")
         else:
